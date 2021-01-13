@@ -5,7 +5,8 @@ import React from "react";
 export default function AccordionItem(props) {
 
   // toggle from active to inactive ( vice versa) to handle dropdown
-  const activityState = "active"
+
+  const activityState = props.isActive? "active" : "inactive"
   const contentIsActive = `content ${activityState}`
 
 

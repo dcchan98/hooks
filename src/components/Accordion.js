@@ -10,10 +10,11 @@ export default function Accordion(props) {
 	};
 
 	const itemsToRender = props.items.map((hero, index) => {
+    const isActive = index === active;
 		// Change to item later
 		return (
 			<div>
-				<AccordionItem handleClick={() => handleActive(index)} hero={hero} />
+				<AccordionItem isActive = {isActive} handleClick={() => handleActive(index)} hero={hero} />
 			</div>
 		);
 	});
