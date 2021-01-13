@@ -36,9 +36,6 @@ export default function Accordion(props) {
       setList([]);
     }
 		
-
-
-		// fetch should go here. Link logic here
 	}, [term]);
 
 	return (
