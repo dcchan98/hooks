@@ -1,8 +1,8 @@
 /** @format */
 
 import { Component } from "react";
-import Accordion from "./components/Accordion";
-
+import Accordion from "./components/AccordionPage/Accordion";
+import Search from "./components/SearchPage/Search";
 const heroDescription = [
 	{
 		name: "Captain America",
@@ -25,7 +25,8 @@ function App() {
 	return (
 		<div className='App'>
 			<br />
-			<Accordion items={heroDescription} />
+			{/* <Accordion items={heroDescription} /> */}
+      <Search/>
 		</div>
 	);
 }
