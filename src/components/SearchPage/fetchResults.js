@@ -1,22 +1,15 @@
-export default function fetchResults(term) {
+import axios from 'axios';
 
-  // async function postData(url = '', data = {}) {
-  //   // Default options are marked with *
-  //   const response = await fetch(url, {
-  //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //       // 'Content-Type': 'application/x-www-form-urlencoded',
-  //     },
-  //     redirect: 'follow', // manual, *follow, error
-  //     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-  //     body: JSON.stringify(data) // body data type must match "Content-Type" header
-  //   });
-  //   return response.json(); // parses JSON response into native JavaScript objects
-  // }
+export default async function fetchResults(term) {
 
-
-  // console.log(`response ${fetch(url,info)}`)
-  console.log(`Search Term: ${term}`)
-  return `Search Term: ${term}`
+  const response = await axios.get('https://en.wikipedia.org/w/api.php', {
+    params: {
+      action: 'query',
+      list: 'search',
+      origin: '*',
+      format: 'json',
+      srsearch: term,
+    },
+  }).then(res => {return res.data.query.search});
+  return response
 }
