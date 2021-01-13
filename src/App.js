@@ -24,6 +24,7 @@ const heroDescription = [
 function App() {
 	return (
 		<div className='App'>
+			<br />
 			<Accordion items={heroDescription} />
 		</div>
 	);

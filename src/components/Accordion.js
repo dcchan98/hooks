@@ -1,15 +1,27 @@
 /** @format */
-import React from "react";
+import React, { useState } from "react";
+import AccordionItem from "./AccordionItem";
 
 export default function Accordion(props) {
-	const itemsToRender = props.items.map((hero) => {
+	const [active, setActive] = useState(-1);
+
+	const handleActive = (index) => {
+		setActive( index)
+	};
+
+	const itemsToRender = props.items.map((hero, index) => {
+		// Change to item later
 		return (
 			<div>
-				<h1>{hero.name}</h1>
-				<p>{hero.description}</p>
+				<AccordionItem handleClick={() => handleActive(index)} hero={hero} />
 			</div>
 		);
 	});
 
-	return <div>{itemsToRender}</div>;
+	return (
+		<div>
+			{active}
+			<div className='ui styled accordion'>{itemsToRender}</div>
+		</div>
+	);
 }
