@@ -12,8 +12,9 @@ export default function Accordion(props) {
 		setTerm(e.target.value);
 	};
 	useEffect(() => {
-		// Update the document title using the browser API
-		axios
+    // Update the document title using the browser API
+    if (term){ // handle undefined search exception 
+      axios
 			.get("https://en.wikipedia.org/w/api.php", {
 				params: {
 					action: "query",
@@ -30,6 +31,11 @@ export default function Accordion(props) {
         console.log(results)
 				setList(results);
 			});
+    }
+    else if (!term){ // empty search term
+      setList([]);
+    }
+		
 
 
 		// fetch should go here. Link logic here
