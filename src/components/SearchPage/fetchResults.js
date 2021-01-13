@@ -11,5 +11,6 @@ export default async function fetchResults(term) {
       srsearch: term,
     },
   }).then(res => {return res.data.query.search});
+  console.log(response)
   return response
 }

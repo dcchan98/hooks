@@ -1,37 +1,44 @@
 /** @format */
 import React, { useState, useEffect } from "react";
-
-import fetchResult from "./fetchResults"
+import axios from "axios";
 
 import SearchResult from "./SearchResult";
 
-
 export default function Accordion(props) {
   const [term, setTerm] = useState("Programming Languages");
-  
-  const handleChange =(e)=> {
-    setTerm(e.target.value);
-  }
-  useEffect(() => {
-    // Update the document title using the browser API
+  const [list,setList] =useState([]);
 
-    async function getArray(){
-      const arrayOfResults = await fetchResult(term)
-      return arrayOfResults;
-    }
+	const handleChange = (e) => {
+		setTerm(e.target.value);
+	};
+	useEffect(() => {
+		// Update the document title using the browser API
+		axios
+			.get("https://en.wikipedia.org/w/api.php", {
+				params: {
+					action: "query",
+					list: "search",
+					origin: "*",
+					format: "json",
+					srsearch: term,
+				},
+			})
+			.then((res) => {
+				return res.data.query.search;
+			})
+			.then((results) => {
+        console.log(results)
+				setList(results);
+			});
 
-    console.log("myArr: "+getArray())
 
-  
-    document.title = `${term}`;
-
-    // fetch should go here. Link logic here
-  },[term]);
-
+		// fetch should go here. Link logic here
+	}, [term]);
 
 	return (
 		<div>
-			<input onChange = {(e)=> handleChange(e) }value={term} type='text' />
+			<input onChange={(e) => handleChange(e)} value={term} type='text' />
+      {list.map((articleItem,index)=><SearchResult articleItem = {articleItem}/>)}
 		</div>
 	);
 }
